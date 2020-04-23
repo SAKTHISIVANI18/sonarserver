@@ -21,8 +21,7 @@ pipeline {
                     sh './mvnw clean package'
 
             }
-
-         }
+        }
         stage ('sonar') {
 
             steps {
