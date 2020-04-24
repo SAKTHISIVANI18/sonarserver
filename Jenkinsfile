@@ -10,6 +10,24 @@ pipeline {
             git  'https://github.com/SAKTHISIVANI18/sonarserver.git'
             }
         }
+        stage ('test') {
+
+ 
+
+            steps {
+
+ 
+
+
+                    sh './mvnw test'
+
+ 
+
+            }
+
+ 
+
+         }  
 
         
 
