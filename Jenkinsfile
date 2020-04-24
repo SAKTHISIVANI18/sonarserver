@@ -22,7 +22,6 @@ pipeline {
                     sh './mvnw test'
 
  
-
             }
 
  
