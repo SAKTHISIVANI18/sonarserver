@@ -33,7 +33,21 @@ pipeline {
 
          }     
         
-        
+         stage ('deploy') {
+
+ 
+
+
+            steps {
+
+ 
+
+              sh 'cp target/JPetStore.war /home/dineshreddy99077/noida/apache-tomcat-7.0.103/webapps/'
+
+ 
+
+            }
+       }
      
         
 
