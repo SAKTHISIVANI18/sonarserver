@@ -7,7 +7,7 @@ pipeline {
         
         stage ('checkout'){
             steps {
-            git  'https://github.com/sshamit/jpetstore-6.git'
+            git  'https://github.com/SAKTHISIVANI18/sonarserver.git'
             }
         }
 
