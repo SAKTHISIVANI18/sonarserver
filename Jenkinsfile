@@ -22,25 +22,7 @@ pipeline {
             }
         } 
       
-        stage('Email Notification') {
-            steps {
-                echo "Ok"
-            }
-        }
-    
-    post {
-        always {
-            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
-        }
-    }
         
-          stage('Quality Gate') {
-            steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-              }
-            }
-          }
          stage ('deploy') {
              steps {
                  sh 'cp target/JPetStore.war /home/dineshreddy99077/noida/apache-tomcat-7.0.103/webapps/'
