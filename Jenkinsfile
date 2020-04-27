@@ -17,17 +17,41 @@ pipeline {
             }
         }   
         stage ('SonarQube analysis') {
-   steps {
-      withSonarQubeEnv('SonarQube') {
-         sh '/opt/apps/devops/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner'
-      }
+     steps {
+        script {
+           STAGE_NAME = "SonarQube analysis"
 
-      def qualitygate = waitForQualityGate()
-      if (qualitygate.status != "OK") {
-         error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-      }
-   }
-}    
+           if (BRANCH_NAME == "develop") {
+              echo "In 'develop' branch, don't analyze."
+           }
+           else { // this is a PR build, run sonar analysis
+              withSonarQubeEnv("SonarGate") {
+                sh '/opt/apps/devops/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner'
+              }
+           }
+        }
+     }
+  }
+
+  stage ('SonarQube Gatekeeper') {
+     steps {
+        script {
+           STAGE_NAME = "SonarQube Gatekeeper"
+
+           if (BRANCH_NAME == "develop") {
+              echo "In 'develop' branch, skip."
+           }
+           else { // this is a PR build, fail on threshold spill
+              def qualitygate = waitForQualityGate()
+              if (qualitygate.status != "OK") {
+                 error "Pipeline aborted due to quality gate duplication failure: ${qualitygate.status}"
+              } 
+           }
+        }
+     }
+  }     
+         
+    
                      
         stage ('deploy') {
              steps {
