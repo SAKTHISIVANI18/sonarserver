@@ -18,9 +18,20 @@ pipeline {
         }    
         stage ('sonar') {
             steps {
+                 withSonarQubeEnv('sonarqube') {
                 sh '/opt/apps/devops/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner'
+                       }
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
             }
         } 
+      
+        }
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
+    }
+}
       
         
          stage ('deploy') {
