@@ -21,7 +21,7 @@ pipeline {
                 sh '/opt/apps/devops/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner'
             }
         } 
-        stage("build & SonarQube analysis") {
+        stage('build & SonarQube analysis') {
             agent any
             steps {
               withSonarQubeEnv('My SonarQube Server') {
@@ -29,7 +29,7 @@ pipeline {
               }
             }
           }
-          stage("Quality Gate") {
+          stage('Quality Gate') {
             steps {
               timeout(time: 1, unit: 'HOURS') {
                 waitForQualityGate abortPipeline: true
