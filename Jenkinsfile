@@ -21,6 +21,18 @@ pipeline {
                 sh '/opt/apps/devops/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner'
             }
         } 
+      
+        stage('Email Notification') {
+            steps {
+                echo "Ok"
+            }
+        }
+    
+    post {
+        always {
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+        }
+    }
         
           stage('Quality Gate') {
             steps {
