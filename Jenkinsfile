@@ -17,17 +17,13 @@ pipeline {
         script {
            STAGE_NAME = "SonarQube analysis"
 
-           if (BRANCH_NAME == "develop") {
-              echo "In 'develop' branch, don't analyze."
-           }
-           else { // this is a PR build, run sonar analysis
               withSonarQubeEnv("SonarGate") {
                 sh '/opt/apps/devops/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner'
               }
            }
         }
      }
-  }
+  
 
   stage ('SonarQube Gatekeeper') {
      steps {
