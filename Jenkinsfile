@@ -11,7 +11,17 @@ pipeline {
             steps {
                 sh './mvnw clean package'
             }
-        }   
+        } 
+        stage ('sonar') {
+
+            steps {
+
+
+                    sh '/opt/apps/devops/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner'
+
+            }
+
+         }     
          stage('build & SonarQube analysis') {
             
             steps {
