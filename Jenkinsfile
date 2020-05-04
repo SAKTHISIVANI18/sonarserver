@@ -13,7 +13,7 @@ pipeline {
             }
         }   
          stage('build & SonarQube analysis') {
-            agent any
+            
             steps {
               withSonarQubeEnv('My SonarQube Server') {
                 sh '/opt/apps/devops/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner'
