@@ -16,7 +16,7 @@ pipeline {
             
             steps {
               withSonarQubeEnv('sonarserver') {
-                sh '/opt/apps/devops/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner'
+                sh 'mvn clean package sonar:sonar'
               }
             }
           }
