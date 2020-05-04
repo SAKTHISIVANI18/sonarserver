@@ -16,7 +16,7 @@ pipeline {
             agent any
             steps {
               withSonarQubeEnv('My SonarQube Server') {
-                sh 'mvn clean package sonar:sonar'
+                sh '/opt/apps/devops/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner'
               }
             }
           }
