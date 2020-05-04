@@ -167,6 +167,7 @@
           <artifactId>maven-war-plugin</artifactId>
           <version>3.2.2</version>
         </plugin>
+            
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
@@ -184,7 +185,7 @@
         <plugin>
           <groupId>org.codehaus.cargo</groupId>
           <artifactId>cargo-maven2-plugin</artifactId>
-          <version>${cargo-maven2-plugin.version}</version>
+          <version>3.7.0</version>
           <configuration>
             <container>
               <containerId>${cargo.maven.containerId}</containerId>
